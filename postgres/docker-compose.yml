@@ -1,0 +1,32 @@
+version: '3.5'
+
+name: postgres_15_2
+
+services:
+  db:
+    image: postgres:15.2
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 0
+    volumes:
+      - postgres_local_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  adminer:
+    image: adminer
+    environment:
+      ADMINER_DESIGN: 'dracula'
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  postgres_local_data:
+    external: false
+    name: postgres_local_data
+
+# Database Access Credentials (replace with your actual credentials or use the default)
+# POSTGRES_USER: root
+# POSTGRES_PASSWORD: 0
