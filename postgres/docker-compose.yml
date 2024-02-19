@@ -1,7 +1,5 @@
 version: '3.5'
 
-name: postgres_15_2
-
 services:
   db:
     image: postgres:15.2
@@ -13,14 +11,6 @@ services:
       - postgres_local_data:/var/lib/postgresql/data
     ports:
       - 5432:5432
-
-  adminer:
-    image: adminer
-    environment:
-      ADMINER_DESIGN: 'dracula'
-    restart: always
-    ports:
-      - 8080:8080
 
 volumes:
   postgres_local_data:
