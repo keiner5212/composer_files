@@ -4,17 +4,11 @@ services:
   db:
     image: redis
     restart: always
-    environment:
-      REDIS_PASSWORD: 0
+    
+    command: ["redis-server", "/etc/redis/redis.conf"]
     volumes:
-      - redis_local_data:/data
+      - ./users.acl:/etc/redis/users.acl
+      - ./redis.conf:/etc/redis/redis.conf
     ports:
       - 6379:6379
 
-volumes:
-  redis_local_data:
-    external: false
-    name: redis_local_data
-
-# Database Access Credentials (replace with your actual credentials or use the default)
-# REDIS_PASSWORD: 0
