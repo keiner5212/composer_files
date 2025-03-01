@@ -1,0 +1,25 @@
+version: '3.5'
+
+services:
+  s3:
+    image: localstack/localstack
+    container_name: localstack_s3
+    environment:
+      SERVICES: "s3"
+      AWS_ACCESS_KEY_ID: fakeAccessKey
+      AWS_SECRET_ACCESS_KEY: fakeSecretKey
+      AWS_DEFAULT_REGION: us-east-1
+    volumes:
+      - localstack_s3_data:/var/lib/localstack
+    ports:
+      - "4572:4572" 
+
+volumes:
+  localstack_s3_data:
+    external: false
+    name: localstack_s3_data
+
+# S3 Access Credentials (replace with your actual credentials or use the default)
+# AWS_ACCESS_KEY_ID: fakeAccessKey
+# AWS_SECRET_ACCESS_KEY: fakeSecretKey
+# AWS_DEFAULT_REGION: us-east-1
