@@ -1,0 +1,25 @@
+version: '3.5'
+
+services:
+  cognito:
+    image: localstack/localstack
+    container_name: localstack_cognito
+    environment:
+      SERVICES: "cognito-idp"
+      AWS_ACCESS_KEY_ID: fakeAccessKey
+      AWS_SECRET_ACCESS_KEY: fakeSecretKey
+      AWS_DEFAULT_REGION: us-east-1
+    volumes:
+      - localstack_cognito_data:/var/lib/localstack
+    ports:
+      - "4590:4590"
+
+volumes:
+  localstack_cognito_data:
+    external: false
+    name: localstack_cognito_data
+
+# Cognito Access Credentials (replace with your actual credentials or use the default)
+# AWS_ACCESS_KEY_ID: fakeAccessKey
+# AWS_SECRET_ACCESS_KEY: fakeSecretKey
+# AWS_DEFAULT_REGION: us-east-1
