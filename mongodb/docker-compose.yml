@@ -1,10 +1,8 @@
 version: '3.5' 
 
-name: mongo_7_0_5
-
 services: 
   db:
-    image: mongo:7.0.5 
+    image: mongo
     restart: always 
     environment: 
       MONGO_INITDB_ROOT_USERNAME: root 
@@ -14,15 +12,6 @@ services:
     ports: 
       - 27017:27017 
 
-  mongo-express:
-    image: mongo-express
-    restart: always
-    ports:
-      - 8081:8081
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: 0
-      ME_CONFIG_MONGODB_URL: mongodb://root:0@db:27017/
 
 volumes:
   mongodb_local_data:
@@ -32,5 +21,3 @@ volumes:
 # Database Access Credentials (replace with your actual credentials or use the default)
 # MONGO_INITDB_ROOT_USERNAME: root
 # MONGO_INITDB_ROOT_PASSWORD: 0
-# ME_CONFIG_MONGODB_ADMINUSERNAME: root
-# ME_CONFIG_MONGODB_ADMINPASSWORD: 0

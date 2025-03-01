@@ -1,10 +1,8 @@
 version: '3.5'
 
-name: mysql_8_2_0
-
 services:
   db:
-    image: mysql:8.2.0
+    image: mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
@@ -13,15 +11,7 @@ services:
       - mysql_local_data:/var/lib/mysql
     ports:
       - 3306:3306
-
-  adminer:
-    image: adminer
-    environment:
-      ADMINER_DESIGN: 'dracula'
-    restart: always
-    ports:
-      - 8080:8080
-
+      
 volumes:
   mysql_local_data:
     external: false

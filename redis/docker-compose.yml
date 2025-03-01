@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+  db:
+    image: redis
+    restart: always
+    
+    command: ["redis-server", "/etc/redis/redis.conf"]
+    volumes:
+      - ./users.acl:/etc/redis/users.acl
+      - ./redis.conf:/etc/redis/redis.conf
+    ports:
+      - 6379:6379
+
