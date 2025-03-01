@@ -1,25 +1,29 @@
-version: '3.5'
-
 services:
-  s3:
-    image: localstack/localstack
-    container_name: localstack_s3
+  minio:
+    image: minio/minio
+    container_name: minio
+    command: ["server", "/data", "--console-address", ":9001"]
+    restart: always
     environment:
-      SERVICES: "s3"
-      AWS_ACCESS_KEY_ID: fakeAccessKey
-      AWS_SECRET_ACCESS_KEY: fakeSecretKey
-      AWS_DEFAULT_REGION: us-east-1
+      MINIO_ROOT_USER: fakeAccessKey
+      MINIO_ROOT_PASSWORD: fakeSecretKey
     volumes:
-      - localstack_s3_data:/var/lib/localstack
+      - minio_data:/data
     ports:
-      - "4572:4572" 
+      - "9000:9000" # API Port
+      - "9001:9001" # Console Port
 
 volumes:
-  localstack_s3_data:
+  minio_data:
     external: false
-    name: localstack_s3_data
+    name: minio_data
 
-# S3 Access Credentials (replace with your actual credentials or use the default)
+# Database Access Credentials (replace with your actual credentials or use the default)
 # AWS_ACCESS_KEY_ID: fakeAccessKey
 # AWS_SECRET_ACCESS_KEY: fakeSecretKey
-# AWS_DEFAULT_REGION: us-east-1
+
+# MINIO_ROOT_USER: fakeAccessKey
+# MINIO_ROOT_PASSWORD: fakeSecretKey
+
+# MinIO Console: http://localhost:9001
+# API Compatible with AWS S3: http://localhost:9000

@@ -1,25 +1,10 @@
-version: '3.5'
-
 services:
-  cognito:
-    image: localstack/localstack
-    container_name: localstack_cognito
-    environment:
-      SERVICES: "cognito-idp"
-      AWS_ACCESS_KEY_ID: fakeAccessKey
-      AWS_SECRET_ACCESS_KEY: fakeSecretKey
-      AWS_DEFAULT_REGION: us-east-1
-    volumes:
-      - localstack_cognito_data:/var/lib/localstack
+  cognito-local:
+    image: jagregory/cognito-local
+    container_name: cognito-local
     ports:
-      - "4590:4590"
-
-volumes:
-  localstack_cognito_data:
-    external: false
-    name: localstack_cognito_data
-
-# Cognito Access Credentials (replace with your actual credentials or use the default)
-# AWS_ACCESS_KEY_ID: fakeAccessKey
-# AWS_SECRET_ACCESS_KEY: fakeSecretKey
-# AWS_DEFAULT_REGION: us-east-1
+      - "9229:9229" # API de Cognito
+    environment:
+      REGION: us-east-1
+      USER_POOL_ID: local-user-pool
+      CLIENT_ID: local-client

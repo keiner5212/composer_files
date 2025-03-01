@@ -1,25 +1,28 @@
-version: '3.5'
-
 services:
   dynamodb:
-    image: localstack/localstack
-    container_name: localstack_dynamodb
+    image: amazon/dynamodb-local
+    container_name: dynamodb
+    command: ["-jar", "DynamoDBLocal.jar", "-sharedDb"]
+    restart: always
     environment:
-      SERVICES: "dynamodb"
       AWS_ACCESS_KEY_ID: fakeAccessKey
       AWS_SECRET_ACCESS_KEY: fakeSecretKey
-      AWS_DEFAULT_REGION: us-east-1
+      AWS_REGION: us-east-1
     volumes:
-      - localstack_dynamodb_data:/var/lib/localstack
+      - dynamodb_data:/home/dynamodblocal/data
+    working_dir: /home/dynamodblocal
     ports:
-      - "4569:4569"
+      - "8000:8000"
 
 volumes:
-  localstack_dynamodb_data:
+  dynamodb_data:
     external: false
-    name: localstack_dynamodb_data
+    name: dynamodb_data
 
 # Database Access Credentials (replace with your actual credentials or use the default)
 # AWS_ACCESS_KEY_ID: fakeAccessKey
 # AWS_SECRET_ACCESS_KEY: fakeSecretKey
-# AWS_DEFAULT_REGION: us-east-1
+# AWS_REGION: us-east-1
+
+# Credentials do not matter; they are not being verified anyway  
+
