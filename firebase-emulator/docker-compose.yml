@@ -1,0 +1,16 @@
+services:
+  firebase-emulator:
+    build: .
+    container_name: firebase-emulator
+    ports:
+      - "4000:4000" # Firebase Emulator UI
+      - "8080:8080" # Firestore
+      - "9099:9099" # Firebase Authentication (sign-in)
+      - "9000:9000" # Firebase Realtime Database
+      - "9199:9199" # Firebase Storage
+      - "9005:9005" # OAuth proxy
+    environment:
+      - FIREBASE_PROJECT=pokemon-equipos
+    volumes:
+      - ./firebase:/firebase
+    restart: unless-stopped
