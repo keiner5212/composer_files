@@ -11,8 +11,14 @@ for dir in */ ; do
         
         cd "$FUNCTION_NAME"
         
-        if [ ! -f "index.js" ]; then
-            echo "Warning: No index.js found in $FUNCTION_NAME, skipping..."
+        if [ ! -f "index.js" ] || [ ! -f "package.json" ]; then
+            echo "Warning: Missing index.js or package.json in $FUNCTION_NAME, skipping..."
+            cd ..
+            continue
+        fi
+        
+        if ! grep -q "exports\.handler\|module\.exports\.handler" index.js; then
+            echo "Warning: No handler found in index.js for $FUNCTION_NAME, skipping..."
             cd ..
             continue
         fi
