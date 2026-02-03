@@ -1,0 +1,24 @@
+services:
+  localstack:
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566"
+      - "4510-4559:4510-4559"
+    environment:
+      - SERVICES=lambda,logs,iam,sts
+      - DEBUG=1
+      - LAMBDA_EXECUTOR=docker
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - LAMBDA_DOCKER_NETWORK=aws-lambda_default
+      - AWS_DEFAULT_REGION=us-east-1
+      - LAMBDA_RUNTIME_ENVIRONMENT_TIMEOUT=300
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./functions:/opt/code/functions:ro"
+      - "./init-scripts:/etc/localstack/init/ready.d"
+    networks:
+      - default
+
+networks:
+  default:
+    name: aws-lambda_default

@@ -1,0 +1,5 @@
+node_modules/
+*.log
+output.json
+.DS_Store
+*.zip
