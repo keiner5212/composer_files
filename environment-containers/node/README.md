@@ -13,8 +13,6 @@ docker compose exec node-dev sh       # Enter shell
 ## Pre-installed
 
 - pnpm (default, fastest package manager)
-- yarn (classic)
-- bun (fast runtime)
 - tsx, ts-node (TypeScript execution)
 - vitest, jest (testing)
 - eslint, prettier (linting)

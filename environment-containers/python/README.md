@@ -12,7 +12,6 @@ docker compose exec python-dev bash   # Enter shell
 
 ## Pre-installed
 
-- pnpm as default package manager
 - uv: ultra-fast Python package installer (50-100x faster than pip)
 - black, isort, ruff (linting/formatting)
 - pytest, mypy (testing/type checking)
